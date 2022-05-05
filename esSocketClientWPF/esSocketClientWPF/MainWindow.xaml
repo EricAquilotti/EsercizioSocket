@@ -1,0 +1,20 @@
+﻿<Window x:Class="esSocketClientWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:xctk="http://schemas/xceed.com/wpf/xaml/toolkit" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:esSocketClientWPF" xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="CLIENT" Height="450" Width="800">
+    <Grid>
+        <xctk1:ColorPicker Name="cp" Margin="46,322,646,65" DisplayColorAndName="True" AvailableColorsSortingMode="HueSaturationBrightness" SelectedColorChanged="cp_SelectedColorChanged" />
+        <InkCanvas x:Name="canvInvio" Margin="37,24,405,140" Background="#FFEADEDE"/>
+        <TextBox x:Name="txtRicevi" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="46,382,0,0"/>
+        <Button x:Name="btnInvia" Content="invia" HorizontalAlignment="Center" Margin="0,321,0,0" VerticalAlignment="Top" Height="33" Width="138" Click="btnInvia_Click"/>
+        <InkCanvas x:Name="canvRicevi" Margin="415,24,26,140" Background="#FFEADEDE" EditingMode="None" IsEnabled="False"/>
+        <Button x:Name="btnStart" Content="start" HorizontalAlignment="Left" Margin="487,321,0,0" VerticalAlignment="Top" Height="33" Width="138" Click="btnStart_Click"/>
+        <Button x:Name="btnCaricaFile" Content="Carica file" HorizontalAlignment="Left" Margin="216,318,0,0" VerticalAlignment="Top" Height="36" Width="93" Click="btnCaricaFile_Click"/>
+        <Button x:Name="btnInfo" Content="Help" HorizontalAlignment="Left" Margin="650,322,0,0" VerticalAlignment="Top" Height="32" Width="111" Click="btnInfo_Click"/>
+    </Grid>
+</Window>

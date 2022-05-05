@@ -1,0 +1,91 @@
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.exe.config
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.exe
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.pdb
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.AssemblyReference.cache
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\MainWindow.g.cs
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\App.g.cs
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF_MarkupCompile.cache
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF_MarkupCompile.lref
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\MainWindow.baml
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.g.resources
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.Properties.Resources.resources
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.GenerateResource.cache
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.CoreCompileInputs.cache
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.exe
+C:\Users\simone.mazzacano.ITT\source\repos\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.pdb
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.exe.config
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.exe
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.pdb
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.AssemblyReference.cache
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.SuggestedBindingRedirects.cache
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\MainWindow.g.cs
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\App.g.cs
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF_MarkupCompile.cache
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\MainWindow.baml
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.g.resources
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.Properties.Resources.resources
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.GenerateResource.cache
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.CoreCompileInputs.cache
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.exe
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.pdb
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.exe.config
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.exe
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.pdb
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.AssemblyReference.cache
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\MainWindow.baml
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\MainWindow.g.cs
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\App.g.cs
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF_MarkupCompile.cache
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.g.resources
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.Properties.Resources.resources
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.GenerateResource.cache
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.CoreCompileInputs.cache
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.exe
+C:\Users\simone.mazzacano.ITT\Downloads\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.pdb
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.exe.config
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.exe
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.pdb
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.AssemblyReference.cache
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.SuggestedBindingRedirects.cache
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\MainWindow.baml
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\MainWindow.g.cs
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\App.g.cs
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF_MarkupCompile.cache
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.g.resources
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.Properties.Resources.resources
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.GenerateResource.cache
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.CoreCompileInputs.cache
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.exe
+C:\Users\Megaport\Desktop\Coding\Coding Scuola\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.pdb
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.exe.config
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.exe
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\esSocketWPF.pdb
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\Xceed.Wpf.AvalonDock.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\cs-CZ\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\ja-JP\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.AssemblyReference.cache
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\MainWindow.baml
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\MainWindow.g.cs
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\App.g.cs
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF_MarkupCompile.cache
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.g.resources
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.Properties.Resources.resources
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.GenerateResource.cache
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.CoreCompileInputs.cache
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.csproj.CopyComplete
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.exe
+C:\Users\eric.aquilotti\Downloads\socketCanvasQuasiFunzionante_TCP\esSocketWPF\esSocketWPF\obj\Debug\esSocketWPF.pdb
