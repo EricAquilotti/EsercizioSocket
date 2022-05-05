@@ -38,10 +38,14 @@ namespace esSocketClientWPF
     {
         string inkFileName = @"canvas.txt";
         Socket socket;
+        //Socket socketText;
         bool isSending = false, isReceiving = false;
         const int MAX_BUFFER = 1 << 15;
+        object _lock;
+        
         public MainWindow()
         {
+            _lock = new object();
             InitializeComponent();
             cp.SelectedColor = Color.FromRgb(0, 0, 0);
         }
@@ -85,22 +89,28 @@ namespace esSocketClientWPF
         {
             try
             {
-                //genera socket
                 IPHostEntry host = Dns.GetHostEntry("localhost"); //ip di host, 127.0.0.1
                 IPAddress ipHost = host.AddressList[0]; //ritorna un array ma in teoria c'è ne è solo uno
 
                 IPEndPoint valoriSocket = new IPEndPoint(ipHost, 11000); //associa ip-porta
+                //IPEndPoint text = new IPEndPoint(ipHost, 10500);
+                //genera socket
                 socket = new Socket(ipHost.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                socket.NoDelay = true;
-                socket.ReceiveBufferSize = MAX_BUFFER;
-                socket.SendBufferSize = MAX_BUFFER;
-                socket.ExclusiveAddressUse = false;
-                
-                socket.Connect(valoriSocket);
-   
-                txtRicevi.Text = "Socket connesso a: " + socket.RemoteEndPoint;
+                //Socket listenerText = new Socket(ipHost.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-                _ = RiceviCanvas();
+                socket.Connect(valoriSocket);
+
+                /*listenerText.ExclusiveAddressUse = false;
+                listenerText.NoDelay = true;
+                listenerText.ReceiveBufferSize = MAX_BUFFER;
+                listenerText.SendBufferSize = MAX_BUFFER;
+                //associa socket a endpoint
+                listenerText.Bind(text);
+                //richieste massime alla volta e mette in ascolto
+                listenerText.Listen(50);*/
+                //socketText = listenerText.Accept();
+
+                lbl_infoConnection.Content = "Socket connesso a: " + socket.RemoteEndPoint;
             }
             catch (Exception ex)
             {
@@ -108,32 +118,42 @@ namespace esSocketClientWPF
             }
         }
 
-        private async Task RiceviMessaggio() //per il testo, non lo uso
+        /*private async Task RiceviMessaggio()
         {
             string messaggio = null;
             byte[] dati = null;
 
             while (true)
             {
-                while (socket.Available <= 0)
+                while (socketText.Available <= 0)
                 {
-                    await Task.Delay(10);
+                    await Task.Delay(50);
                 }
                 dati = new byte[1 << 10];
 
-                int lenBytes = socket.Receive(dati);
+                int lenBytes = socketText.Receive(dati);
                 
                 messaggio += Encoding.ASCII.GetString(dati, 0, lenBytes);
-                if (messaggio.Contains("<EOF>"))
-                {
-                    txtRicevi.Text = "Ricevuto: " + messaggio;
-                    messaggio = null;
-                }
+                lbl_received.Content = "Received: " + messaggio;
+                messaggio = null;
 
             }
 
-        }
+        }*/
 
+        private async Task SendCanvas()
+        {
+            while (true)
+            {
+                if (isReceiving) return;
+                isSending = true;
+                byte[] messaggio = CanvasToBytes();
+                if (messaggio.Length > MAX_BUFFER) throw new Exception("Canvas supera la dimensione massima consentita");
+                int byteSent = socket.Send(messaggio);
+                isSending = false;
+                await Task.Delay(150);
+            }
+        }
         private async Task RiceviCanvas()
         {
             try
@@ -170,7 +190,6 @@ namespace esSocketClientWPF
 
                     canvRicevi.Strokes = BytesToCanvas(toConvert);
                     isReceiving = false;
-                    txtRicevi.Text = "Canvas ricevuto" + DateTime.Now.ToString("t");
                 }
             }
             catch (Exception ex)
@@ -178,6 +197,17 @@ namespace esSocketClientWPF
                 MessageBox.Show(ex.Message);
             }
         }
+
+        /*private void SendText()
+        {
+            lock (_lock)
+            {
+                byte[] msg = Encoding.ASCII.GetBytes(txt_invia.Text);
+
+                //spedisco i dati e ricevo la risposta
+                int bytesSent = socketText.Send(msg);
+            }
+        }*/
 
 
         #endregion
@@ -189,23 +219,9 @@ namespace esSocketClientWPF
             {
                 StartServer();
                 btnStart.IsEnabled = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void btnInvia_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (isReceiving) return;
-                isSending = true;
-                byte[] messaggio = CanvasToBytes();
-                if (messaggio.Length > MAX_BUFFER) throw new Exception("Canvas supera la dimensione massima consentita");
-                int byteSent = socket.Send(messaggio);
-                isSending = false;
+                SendCanvas();
+                //RiceviMessaggio();
+                RiceviCanvas();
             }
             catch (Exception ex)
             {
@@ -224,6 +240,16 @@ namespace esSocketClientWPF
         {
             canvInvio.DefaultDrawingAttributes.Color = (Color)cp.SelectedColor;
         }
+
+        private void btn_gomma_Click(object sender, RoutedEventArgs e)
+        {
+            canvInvio.DefaultDrawingAttributes.Color = ((SolidColorBrush)canvInvio.Background).Color;
+        }
+
+        /*private void txt_invia_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SendText();
+        }*/
 
         private void btnCaricaFile_Click(object sender, RoutedEventArgs e)
         {

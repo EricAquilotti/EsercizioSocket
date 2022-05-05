@@ -9,12 +9,15 @@
         Title="SERVER" Height="450" Width="800">
     <Grid>
         <xctk1:ColorPicker Name="cp" Margin="37,318,654,65" DisplayColorAndName="True" AvailableColorsSortingMode="HueSaturationBrightness" SelectedColorChanged="cp_SelectedColorChanged" />
-        <InkCanvas x:Name="canvInvio" Margin="37,24,405,140" Background="#FFEADEDE"/>
-        <TextBox x:Name="txtRicevi" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="50,377,0,0"/>
-        <Button x:Name="btnInvia" Content="invia" HorizontalAlignment="Center" Margin="0,321,0,0" VerticalAlignment="Top" Height="33" Width="138" Click="btnInvia_Click"/>
-        <InkCanvas x:Name="canvRicevi" Margin="415,24,26,140" Background="#FFEADEDE" EditingMode="None" IsEnabled="False"/>
+        <InkCanvas x:Name="canvInvio" Margin="37,57,405,143" Background="#FFEADEDE"/>
+        <InkCanvas x:Name="canvRicevi" Margin="414,57,26,143" Background="#FFEADEDE" EditingMode="None" IsEnabled="False"/>
         <Button x:Name="btnStart" Content="start" HorizontalAlignment="Left" Margin="487,321,0,0" VerticalAlignment="Top" Height="33" Width="138" Click="btnStart_Click"/>
-        <Button x:Name="btnCaricaFile" Content="Carica file" HorizontalAlignment="Left" Margin="216,318,0,0" VerticalAlignment="Top" Height="36" Width="93" Click="btnCaricaFile_Click"/>
+        <Button x:Name="btnCaricaFile" Content="Carica file" HorizontalAlignment="Left" Margin="368,321,0,0" VerticalAlignment="Top" Height="36" Width="93" Click="btnCaricaFile_Click"/>
         <Button x:Name="btnInfo" Content="Help" HorizontalAlignment="Left" Margin="650,322,0,0" VerticalAlignment="Top" Height="32" Width="111" Click="btnInfo_Click"/>
+        <!-- <TextBox x:Name="txt_invia" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="95,383,0,0" Width="121" Height="41" TextChanged="txt_invia_TextChanged"/>
+        <Label Content="To send:" HorizontalAlignment="Left" Margin="37,379,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_received" Content="" HorizontalAlignment="Left" Margin="363,383,0,0" VerticalAlignment="Top"/> -->
+        <Label x:Name="lbl_infoConnection" Content="" HorizontalAlignment="Left" Margin="206,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_gomma" Content="GOMMA" HorizontalAlignment="Left" Margin="151,318,0,0" VerticalAlignment="Top" Height="50" Width="78" Click="btn_gomma_Click"/>
     </Grid>
 </Window>
