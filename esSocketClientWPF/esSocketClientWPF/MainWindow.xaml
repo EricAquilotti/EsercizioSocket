@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:esSocketClientWPF" xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="CLIENT" Height="450" Width="800">
+        Title="CLIENT" Height="462.296" Width="800">
     <Grid>
         <xctk1:ColorPicker Name="cp" Margin="46,322,646,65" DisplayColorAndName="True" AvailableColorsSortingMode="HueSaturationBrightness" SelectedColorChanged="cp_SelectedColorChanged" />
         <InkCanvas x:Name="canvInvio" Margin="37,47,405,140" Background="#FFEADEDE"/>
@@ -14,10 +14,11 @@
         <Button x:Name="btnStart" Content="start" HorizontalAlignment="Left" Margin="487,321,0,0" VerticalAlignment="Top" Height="33" Width="138" Click="btnStart_Click"/>
         <Button x:Name="btnCaricaFile" Content="Carica file" HorizontalAlignment="Left" Margin="363,322,0,0" VerticalAlignment="Top" Height="32" Width="93" Click="btnCaricaFile_Click"/>
         <Button x:Name="btnInfo" Content="Help" HorizontalAlignment="Left" Margin="650,322,0,0" VerticalAlignment="Top" Height="32" Width="111" Click="btnInfo_Click"/>
-        <!-- <Label Content="To send:" HorizontalAlignment="Left" Margin="37,379,0,0" VerticalAlignment="Top"/>
+        <Label Content="To send:" HorizontalAlignment="Left" Margin="37,379,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_invia" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="95,383,0,0" Width="121" Height="41" TextChanged="txt_invia_TextChanged"/>
-        <Label x:Name="lbl_received" Content="" HorizontalAlignment="Left" Margin="363,383,0,0" VerticalAlignment="Top"/> -->
+        <Label x:Name="lbl_received" Content="" HorizontalAlignment="Left" Margin="363,383,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_infoConnection" Content="" HorizontalAlignment="Left" Margin="206,10,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btn_gomma" Content="GOMMA" HorizontalAlignment="Left" Margin="159,322,0,0" VerticalAlignment="Top" Height="47" Width="78" Click="btn_gomma_Click"/>
+        <Slider x:Name="sld_size" HorizontalAlignment="Left" Margin="242,322,0,0" VerticalAlignment="Top" Width="115" Height="22" Minimum="1" SmallChange="1" ValueChanged="sld_size_ValueChanged"/>
     </Grid>
 </Window>

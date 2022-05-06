@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace esSocketClientWPF
 {
@@ -38,7 +39,7 @@ namespace esSocketClientWPF
     {
         string inkFileName = @"canvas.txt";
         Socket socket;
-        //Socket socketText;
+        Socket socketText;
         bool isSending = false, isReceiving = false;
         const int MAX_BUFFER = 1 << 15;
         object _lock;
@@ -93,24 +94,15 @@ namespace esSocketClientWPF
                 IPAddress ipHost = host.AddressList[0]; //ritorna un array ma in teoria c'è ne è solo uno
 
                 IPEndPoint valoriSocket = new IPEndPoint(ipHost, 11000); //associa ip-porta
-                //IPEndPoint text = new IPEndPoint(ipHost, 10500);
+                IPEndPoint text = new IPEndPoint(ipHost, 10500);
                 //genera socket
                 socket = new Socket(ipHost.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                //Socket listenerText = new Socket(ipHost.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                socketText = new Socket(ipHost.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
                 socket.Connect(valoriSocket);
+                socketText.Connect(text);
 
-                /*listenerText.ExclusiveAddressUse = false;
-                listenerText.NoDelay = true;
-                listenerText.ReceiveBufferSize = MAX_BUFFER;
-                listenerText.SendBufferSize = MAX_BUFFER;
-                //associa socket a endpoint
-                listenerText.Bind(text);
-                //richieste massime alla volta e mette in ascolto
-                listenerText.Listen(50);*/
-                //socketText = listenerText.Accept();
-
-                lbl_infoConnection.Content = "Socket connesso a: " + socket.RemoteEndPoint;
+                lbl_infoConnection.Content = "Socket connesso a: " + socket.RemoteEndPoint + "\t" + socketText.RemoteEndPoint;
             }
             catch (Exception ex)
             {
@@ -118,7 +110,7 @@ namespace esSocketClientWPF
             }
         }
 
-        /*private async Task RiceviMessaggio()
+        private async Task RiceviMessaggio()
         {
             string messaggio = null;
             byte[] dati = null;
@@ -139,7 +131,7 @@ namespace esSocketClientWPF
 
             }
 
-        }*/
+        }
 
         private async Task SendCanvas()
         {
@@ -198,16 +190,15 @@ namespace esSocketClientWPF
             }
         }
 
-        /*private void SendText()
+        private void SendText()
         {
             lock (_lock)
             {
-                byte[] msg = Encoding.ASCII.GetBytes(txt_invia.Text);
-
                 //spedisco i dati e ricevo la risposta
-                int bytesSent = socketText.Send(msg);
+                int bytesSent = socketText.Send(Encoding.ASCII.GetBytes(txt_invia.Text));
+                Thread.Sleep(30);
             }
-        }*/
+        }
 
 
         #endregion
@@ -220,7 +211,7 @@ namespace esSocketClientWPF
                 StartServer();
                 btnStart.IsEnabled = false;
                 SendCanvas();
-                //RiceviMessaggio();
+                RiceviMessaggio();
                 RiceviCanvas();
             }
             catch (Exception ex)
@@ -244,12 +235,19 @@ namespace esSocketClientWPF
         private void btn_gomma_Click(object sender, RoutedEventArgs e)
         {
             canvInvio.DefaultDrawingAttributes.Color = ((SolidColorBrush)canvInvio.Background).Color;
+            cp.SelectedColor = ((SolidColorBrush)canvInvio.Background).Color;
         }
 
-        /*private void txt_invia_TextChanged(object sender, TextChangedEventArgs e)
+        private void txt_invia_TextChanged(object sender, TextChangedEventArgs e)
         {
             SendText();
-        }*/
+        }
+
+        private void sld_size_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            canvInvio.DefaultDrawingAttributes.Width = sld_size.Value;
+            canvInvio.DefaultDrawingAttributes.Height = sld_size.Value;
+        }
 
         private void btnCaricaFile_Click(object sender, RoutedEventArgs e)
         {

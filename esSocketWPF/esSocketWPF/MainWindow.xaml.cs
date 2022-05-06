@@ -40,7 +40,7 @@ namespace esSocketWPF
         string inkFileName = @"canvas.txt";
 
         Socket socket;
-        //Socket socketText;
+        Socket socketText;
         bool isSending = false, isReceiving = false;
         const int MAX_BUFFER = 1 << 15;
         object _lock;
@@ -99,7 +99,7 @@ namespace esSocketWPF
                 Socket listener = new Socket(ipHost.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
                 //feature aggiuntiva con i messaggi in tempo reale, bisogna capire come usare 2 socket con 2 ip e porte diverse
-                //Socket listenerText = new Socket(ipHost.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                Socket listenerText = new Socket(ipHost.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
              
                 listener.ExclusiveAddressUse = false;
                 listener.NoDelay = true;
@@ -110,18 +110,18 @@ namespace esSocketWPF
                 //richieste massime alla volta e mette in ascolto
                 listener.Listen(50);
 
-                /*listenerText.ExclusiveAddressUse = false;
+                listenerText.ExclusiveAddressUse = false;
                 listenerText.NoDelay = true;
                 listenerText.ReceiveBufferSize = MAX_BUFFER;
                 listenerText.SendBufferSize = MAX_BUFFER;
                 //associa socket a endpoint
                 listenerText.Bind(text);
                 //richieste massime alla volta e mette in ascolto
-                listenerText.Listen(50);*/
+                listenerText.Listen(50);
 
                 socket = listener.Accept();
                 
-                //socketText = listenerText.Accept();
+                socketText = listenerText.Accept();
 
                 lbl_infoConnection.Content = "Socket connesso a: " + socket.RemoteEndPoint;
 
@@ -132,7 +132,7 @@ namespace esSocketWPF
             }
         }
         
-        /*private async Task RiceviMessaggio()
+        private async Task RiceviMessaggio()
         {
             string messaggio = null;
             byte[] dati = null;
@@ -149,7 +149,7 @@ namespace esSocketWPF
                 lbl_received.Content = "Received: " + messaggio;
                 messaggio = null;
             }
-        }*/
+        }
 
         private async Task RiceviCanvas() 
         {
@@ -188,16 +188,15 @@ namespace esSocketWPF
             }
         }
 
-        /*private void SendText()
+        private void SendText()
         {
             lock (_lock)
             {
-                byte[] msg = Encoding.ASCII.GetBytes(txt_invia.Text);
-
                 //spedisco i dati e ricevo la risposta
-                int bytesSent = socketText.Send(msg);
+                int bytesSent = socketText.Send(Encoding.ASCII.GetBytes(txt_invia.Text));
+                Thread.Sleep(30);
             }
-        }*/
+        }
 
         private async Task SendCanvas()
         {
@@ -221,7 +220,7 @@ namespace esSocketWPF
                 StartServer();
                 btnStart.IsEnabled = false;
                 RiceviCanvas(); //task
-                //RiceviMessaggio();
+                RiceviMessaggio();
                 SendCanvas();
             }
             catch (Exception ex)
@@ -245,12 +244,19 @@ namespace esSocketWPF
         private void btn_gomma_Click(object sender, RoutedEventArgs e)
         {
             canvInvio.DefaultDrawingAttributes.Color = ((SolidColorBrush)canvInvio.Background).Color;
+            cp.SelectedColor = ((SolidColorBrush)canvInvio.Background).Color;
         }
 
-        /*private void txt_invia_TextChanged(object sender, TextChangedEventArgs e)
+        private void txt_invia_TextChanged(object sender, TextChangedEventArgs e)
         {
             SendText();
-        }*/
+        }
+
+        private void sld_size_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            canvInvio.DefaultDrawingAttributes.Width = sld_size.Value;
+            canvInvio.DefaultDrawingAttributes.Height = sld_size.Value;
+        }
 
         private void btnCaricaFile_Click(object sender, RoutedEventArgs e)
         {
