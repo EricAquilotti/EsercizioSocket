@@ -123,7 +123,7 @@ namespace esSocketWPF
                 
                 socketText = listenerText.Accept();
 
-                lbl_infoConnection.Content = "Socket connesso a: " + socket.RemoteEndPoint;
+                lbl_infoConnection.Content = "Socket connesso a: " + socket.RemoteEndPoint + '\t' + socketText.RemoteEndPoint;
 
             }
             catch (Exception ex)
@@ -139,8 +139,7 @@ namespace esSocketWPF
 
             while (true)
             {
-                await Task.Delay(100);
-                if (socketText.Available <= 0) continue;
+                while (socketText.Available <= 0) await Task.Delay(10);
                 dati = new byte[1 << 10];
 
                 int lenBytes = socketText.Receive(dati);
@@ -192,9 +191,9 @@ namespace esSocketWPF
         {
             lock (_lock)
             {
+                Thread.Sleep(15);
                 //spedisco i dati e ricevo la risposta
                 int bytesSent = socketText.Send(Encoding.ASCII.GetBytes(txt_invia.Text));
-                Thread.Sleep(30);
             }
         }
 

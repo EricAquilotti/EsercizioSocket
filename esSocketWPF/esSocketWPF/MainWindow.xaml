@@ -19,6 +19,7 @@
         <Label x:Name="lbl_received" Content="" HorizontalAlignment="Left" Margin="363,383,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_infoConnection" Content="" HorizontalAlignment="Left" Margin="206,10,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btn_gomma" Content="GOMMA" HorizontalAlignment="Left" Margin="151,318,0,0" VerticalAlignment="Top" Height="46" Width="78" Click="btn_gomma_Click"/>
-        <Slider x:Name="sld_size" HorizontalAlignment="Left" Margin="234,322,0,0" VerticalAlignment="Top" Width="115" Height="22" Minimum="1" SmallChange="1" ValueChanged="sld_size_ValueChanged"/>
+        <Slider x:Name="sld_size" HorizontalAlignment="Left" Margin="234,342,0,0" VerticalAlignment="Top" Width="115" Height="22" Minimum="1" SmallChange="1" ValueChanged="sld_size_ValueChanged"/>
+        <Label Content="Grandezza pennello" HorizontalAlignment="Left" Height="27" Margin="234,315,0,0" VerticalAlignment="Top" Width="115"/>
     </Grid>
 </Window>

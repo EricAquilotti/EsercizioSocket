@@ -117,10 +117,7 @@ namespace esSocketClientWPF
 
             while (true)
             {
-                while (socketText.Available <= 0)
-                {
-                    await Task.Delay(50);
-                }
+                while (socketText.Available <= 0) await Task.Delay(10);
                 dati = new byte[1 << 10];
 
                 int lenBytes = socketText.Receive(dati);
@@ -194,9 +191,9 @@ namespace esSocketClientWPF
         {
             lock (_lock)
             {
+                Thread.Sleep(15);
                 //spedisco i dati e ricevo la risposta
                 int bytesSent = socketText.Send(Encoding.ASCII.GetBytes(txt_invia.Text));
-                Thread.Sleep(30);
             }
         }
 
