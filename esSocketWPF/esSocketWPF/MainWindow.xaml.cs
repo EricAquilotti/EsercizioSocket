@@ -18,6 +18,8 @@ using System.Windows.Ink;
 using System.IO;
 using System.Threading;
 using Microsoft.Win32;
+using System.Reflection;
+using System.Windows.Threading;
 
 namespace esSocketWPF
 {
@@ -37,7 +39,11 @@ namespace esSocketWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        string inkFileName = @"canvas.txt";
+        DispatcherTimer timer;
+        readonly string[] oggettiDaDisegnare = { "bicchiere", "moneta", "braccialetto", "maglia", "macchina", "albero" };
+        string daDisegnare;
+        const string inkFileName = @"canvas.txt";
+        int currTime;
 
         Socket socket;
         Socket socketText;
@@ -49,6 +55,9 @@ namespace esSocketWPF
             _lock = new object();
             InitializeComponent();
             cp.SelectedColor = Color.FromRgb(0, 0, 0);
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += TickEvent;
         }
 
         private byte[] CanvasToBytes()
@@ -123,15 +132,50 @@ namespace esSocketWPF
                 
                 socketText = listenerText.Accept();
 
-                lbl_infoConnection.Content = "Socket connesso a: " + socket.RemoteEndPoint + '\t' + socketText.RemoteEndPoint;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Errore: " + ex.Message);
             }
         }
-        
+        private void StartTimer()
+        {
+            currTime = 60;
+            lbl_timer.Content = null;
+            lbl_timer.Content = currTime;
+            timer.Start();
+        }
+        private void StopTimer()
+        {
+            timer.Stop();
+        }
+        private void TickEvent(object sender, EventArgs e)
+        {
+            currTime--;
+            lbl_timer.Content = null;
+            lbl_timer.Content = currTime;
+            if (currTime == 0)
+            {
+                if (lbl_disegna.Content.ToString() == "INDOVINA")
+                    AvviaTurno();
+                else
+                    FineTurno();
+            }
+        }
+        private async Task LabelColor()
+        {
+            while(true)
+            {
+                lbl_disegna.Foreground = PickRandomBrush();
+                lbl_timer.Foreground = PickRandomBrush();
+                await Task.Delay(500);
+            }
+        }
+        private Brush PickRandomBrush()
+        {
+            Random r = new Random();
+            return new SolidColorBrush(Color.FromArgb(255, (byte)r.Next(0,200), (byte)r.Next(0, 200), (byte)r.Next(0, 200)));
+        }
         private async Task RiceviMessaggio()
         {
             string messaggio = null;
@@ -145,9 +189,52 @@ namespace esSocketWPF
                 int lenBytes = socketText.Receive(dati);
 
                 messaggio += Encoding.ASCII.GetString(dati, 0, lenBytes);
-                lbl_received.Content = "Received: " + messaggio;
+                if (messaggio.Contains("<SUB>"))
+                {
+                    string res = messaggio.Substring(5, messaggio.Length - 5);
+                    if (res.ToLower() == daDisegnare.ToLower())
+                    {
+                        SendText("<RES>1");
+                        MessageBox.Show("INDOVINATO!", "VITTORIA", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        AvviaTurno();
+                    }
+                    else
+                    {
+                        SendText("<RES>0");
+                    }
+                }
+                else if (messaggio.Contains("<RES>"))
+                {
+                    if (messaggio.Substring(5, messaggio.Length - 5) == "1")
+                    {
+                        MessageBox.Show("INDOVINATO!", "VITTORIA", MessageBoxButton.OK, MessageBoxImage.Information);
+                        FineTurno();
+                    }
+                    else
+                        MessageBox.Show("SBAGLIATO!", "ERRORE", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    lbl_received.Content = null;
+                    lbl_received.Content = "Received: " + messaggio;
+                }
                 messaggio = null;
             }
+        }
+        private void FineTurno()
+        {
+            lbl_disegna.Content = null;
+            lbl_disegna.Content = "INDOVINA";
+            StopTimer();
+            StartTimer();
+        }
+        private void AvviaTurno()
+        {
+            daDisegnare = oggettiDaDisegnare[new Random().Next(0, oggettiDaDisegnare.Length)];
+            lbl_disegna.Content = null;
+            lbl_disegna.Content = "Disegna: " + daDisegnare;
+            StopTimer();
+            StartTimer();
         }
 
         private async Task RiceviCanvas() 
@@ -187,13 +274,13 @@ namespace esSocketWPF
             }
         }
 
-        private void SendText()
+        private void SendText(string text)
         {
             lock (_lock)
             {
                 Thread.Sleep(15);
                 //spedisco i dati e ricevo la risposta
-                int bytesSent = socketText.Send(Encoding.ASCII.GetBytes(txt_invia.Text));
+                int bytesSent = socketText.Send(Encoding.ASCII.GetBytes(text));
             }
         }
 
@@ -218,9 +305,13 @@ namespace esSocketWPF
             {
                 StartServer();
                 btnStart.IsEnabled = false;
+                daDisegnare = oggettiDaDisegnare[new Random().Next(0, oggettiDaDisegnare.Length)];
+                lbl_disegna.Content = "Disegna: " + daDisegnare;
                 RiceviCanvas(); //task
                 RiceviMessaggio();
                 SendCanvas();
+                LabelColor();
+                StartTimer();
             }
             catch (Exception ex)
             {
@@ -248,13 +339,18 @@ namespace esSocketWPF
 
         private void txt_invia_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SendText();
+            SendText(txt_invia.Text);
         }
 
         private void sld_size_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             canvInvio.DefaultDrawingAttributes.Width = sld_size.Value;
             canvInvio.DefaultDrawingAttributes.Height = sld_size.Value;
+        }
+
+        private void btn_submit_Click(object sender, RoutedEventArgs e)
+        {
+            SendText("<SUB>" + txt_guess.Text);
         }
 
         private void btnCaricaFile_Click(object sender, RoutedEventArgs e)
