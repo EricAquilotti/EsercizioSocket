@@ -43,8 +43,9 @@ namespace esSocketWPF
         readonly string[] oggettiDaDisegnare = { "bicchiere", "moneta", "braccialetto", "maglia", "macchina", "albero" };
         string daDisegnare;
         const string inkFileName = @"canvas.txt";
-        /*DispatcherTimer timer;
-        int currTime;*/
+        DispatcherTimer timer;
+        int currTime;
+        const int durataSecondi = 90;
 
         Socket socket;
         Socket socketText;
@@ -57,9 +58,9 @@ namespace esSocketWPF
             _lock = new object();
             InitializeComponent();
             cp.SelectedColor = Color.FromRgb(0, 0, 0);
-            /*timer = new DispatcherTimer();
+            timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += TickEvent;*/
+            timer.Tick += TickEvent;
             myTurn = true;
             txt_guess.IsEnabled = false;
             btn_submit.IsEnabled = false;
@@ -143,9 +144,9 @@ namespace esSocketWPF
                 MessageBox.Show("Errore: " + ex.Message);
             }
         }
-        /*private void StartTimer()
+        private void StartTimer()
         {
-            currTime = 120;
+            currTime = durataSecondi;
             lbl_timer.Content = null;
             lbl_timer.Content = currTime;
             timer.Start();
@@ -161,18 +162,19 @@ namespace esSocketWPF
             lbl_timer.Content = currTime;
             if (currTime == 0)
             {
+                lst_messaggi.Items.Add("TEMPO SCADUTO! INVERSIONE DI RUOLI");
                 if (lbl_disegna.Content.ToString() == "INDOVINA")
                     AvviaTurno();
                 else
                     FineTurno();
             }
-        }*/
+        }
         private async Task LabelColor()
         {
             while(true)
             {
                 lbl_disegna.Foreground = PickRandomBrush();
-                //lbl_timer.Foreground = PickRandomBrush();
+                lbl_timer.Foreground = PickRandomBrush();
                 await Task.Delay(500);
             }
         }
@@ -213,7 +215,7 @@ namespace esSocketWPF
                     if (messaggio.Substring(5, messaggio.Length - 5) == "1")
                     {
                         lst_messaggi.Items.Add("HAI INDOVINATO!");
-                        FineTurno();
+                        AvviaTurno();
                     }
                     else
                         MessageBox.Show("SBAGLIATO!", "ERRORE", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -227,28 +229,28 @@ namespace esSocketWPF
         }
         private void FineTurno()
         {
+            myTurn = false;
             lbl_disegna.Content = null;
             lbl_disegna.Content = "INDOVINA";
             canvInvio.IsEnabled = false;
-            myTurn = false;
-            canvInvio.Strokes.Clear();
             txt_guess.IsEnabled = true;
             btn_submit.IsEnabled = true;
-            /*StopTimer();
-            StartTimer();*/
+            StopTimer();
+            StartTimer();
+            canvInvio.Strokes.Clear();
         }
         private void AvviaTurno()
         {
+            myTurn = true;
             daDisegnare = oggettiDaDisegnare[new Random().Next(0, oggettiDaDisegnare.Length)];
             lbl_disegna.Content = null;
             lbl_disegna.Content = "Disegna: " + daDisegnare;
             canvInvio.IsEnabled = true;
-            myTurn = true;
-            canvInvio.Strokes.Clear();
             txt_guess.IsEnabled = false;
             btn_submit.IsEnabled = false;
-            /*StopTimer();
-            StartTimer();*/
+            StopTimer();
+            StartTimer();
+            canvInvio.Strokes.Clear();
         }
 
         private async Task RiceviCanvas() 
@@ -257,7 +259,7 @@ namespace esSocketWPF
 
             while (true)
             {
-                while (isSending || socket.Available <= 0)
+                while (isSending || socket.Available <= 0 || myTurn)
                 {
                     await Task.Delay(50);//lascia l'interfaccia fare le sue cose e poi riesegue, senza Task rimarrebbe bloccato all'infinito
                 }
@@ -302,7 +304,7 @@ namespace esSocketWPF
         {
             while (true)
             {
-                if (isReceiving || !myTurn) return;
+                while (isReceiving || !myTurn) await Task.Delay(50);
                 isSending = true;
                 byte[] messaggio = CanvasToBytes();
                 if (messaggio.Length > MAX_BUFFER) throw new Exception("Canvas supera la dimensione massima consentita");
@@ -325,7 +327,7 @@ namespace esSocketWPF
                 RiceviMessaggio();
                 SendCanvas();
                 LabelColor();
-                //StartTimer();
+                StartTimer();
             }
             catch (Exception ex)
             {

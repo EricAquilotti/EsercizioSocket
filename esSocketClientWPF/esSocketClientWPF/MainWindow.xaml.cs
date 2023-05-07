@@ -39,8 +39,9 @@ namespace esSocketClientWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        /*DispatcherTimer timer;
-        int currTime;*/
+        DispatcherTimer timer;
+        int currTime;
+        const int durataSecondi = 90;
         //per gli oggetti da disegnare si può fare un file con migliaia di oggetti che viene letto all'inizio ma non mi sembra necessario al momento
         readonly string[] oggettiDaDisegnare = { "bicchiere", "moneta", "braccialetto", "maglia", "macchina", "albero" };
         string daDisegnare;
@@ -57,9 +58,9 @@ namespace esSocketClientWPF
             _lock = new object();
             InitializeComponent();
             cp.SelectedColor = Color.FromRgb(0, 0, 0);
-            /*timer = new DispatcherTimer();
+            timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += TickEvent;*/
+            timer.Tick += TickEvent;
             myTurn = false;
             canvInvio.IsEnabled = false;
         }
@@ -179,9 +180,9 @@ namespace esSocketClientWPF
                 messaggio = null;
             }
         }
-        /*private void StartTimer()
+        private void StartTimer()
         {
-            currTime = 120;
+            currTime = durataSecondi;
             lbl_timer.Content = null;
             lbl_timer.Content = currTime;
             timer.Start();
@@ -197,43 +198,44 @@ namespace esSocketClientWPF
             lbl_timer.Content = currTime;
             if(currTime == 0)
             {
+                lst_messaggi.Items.Add("TEMPO SCADUTO! INVERSIONE DI RUOLI");
                 if (lbl_disegna.Content.ToString() == "INDOVINA")
                     AvviaTurno();
                 else
                     FineTurno();
             }
-        }*/
+        }
         private void FineTurno()
         {
+            myTurn = false;
             lbl_disegna.Content = null;
             lbl_disegna.Content = "INDOVINA";
             canvInvio.IsEnabled = false;
-            myTurn = false;
-            canvInvio.Strokes.Clear();
             txt_guess.IsEnabled = true;
             btn_submit.IsEnabled = true;
-            /*StopTimer();
-            StartTimer();*/
+            StopTimer();
+            StartTimer();
+            canvInvio.Strokes.Clear();
         }
         private void AvviaTurno()
         {
+            myTurn = true;
             daDisegnare = oggettiDaDisegnare[new Random().Next(0, oggettiDaDisegnare.Length)];
             lbl_disegna.Content = null;
             lbl_disegna.Content = "Disegna: " + daDisegnare;
             canvInvio.IsEnabled = true;
-            myTurn = true;
-            canvInvio.Strokes.Clear();
             txt_guess.IsEnabled = false;
             btn_submit.IsEnabled = false;
-            /*StopTimer();
-            StartTimer();*/
+            StopTimer();
+            StartTimer();
+            canvInvio.Strokes.Clear();
         }
 
         private async Task SendCanvas()
         {
             while (true)
             {
-                if (isReceiving || !myTurn) return;
+                while (isReceiving || !myTurn) await Task.Delay(50);
                 isSending = true;
                 byte[] messaggio = CanvasToBytes();
                 if (messaggio.Length > MAX_BUFFER) throw new Exception("Canvas supera la dimensione massima consentita");
@@ -250,7 +252,7 @@ namespace esSocketClientWPF
 
                 while (true)
                 {
-                    while (isSending || socket.Available <= 0)
+                    while (isSending || socket.Available <= 0 || myTurn)
                     {
                         await Task.Delay(50);//lascia l'interfaccia fare le sue cose e poi riesegue, senza Task rimarrebbe bloccato all'infinito
                     }
@@ -310,7 +312,7 @@ namespace esSocketClientWPF
                 SendCanvas();
                 RiceviMessaggio();
                 RiceviCanvas();
-                //StartTimer();
+                StartTimer();
             }
             catch (Exception ex)
             {
