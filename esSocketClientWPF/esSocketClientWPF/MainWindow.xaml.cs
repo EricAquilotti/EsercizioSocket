@@ -39,8 +39,9 @@ namespace esSocketClientWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        DispatcherTimer timer;
-        int currTime;
+        /*DispatcherTimer timer;
+        int currTime;*/
+        //per gli oggetti da disegnare si può fare un file con migliaia di oggetti che viene letto all'inizio ma non mi sembra necessario al momento
         readonly string[] oggettiDaDisegnare = { "bicchiere", "moneta", "braccialetto", "maglia", "macchina", "albero" };
         string daDisegnare;
         string inkFileName = @"canvas.txt";
@@ -49,15 +50,18 @@ namespace esSocketClientWPF
         bool isSending = false, isReceiving = false;
         const int MAX_BUFFER = 1 << 15;
         object _lock;
+        bool myTurn;
         
         public MainWindow()
         {
             _lock = new object();
             InitializeComponent();
             cp.SelectedColor = Color.FromRgb(0, 0, 0);
-            timer = new DispatcherTimer();
+            /*timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += TickEvent;
+            timer.Tick += TickEvent;*/
+            myTurn = false;
+            canvInvio.IsEnabled = false;
         }
 
         private byte[] CanvasToBytes()
@@ -150,7 +154,7 @@ namespace esSocketClientWPF
                     if (res.ToLower() == daDisegnare.ToLower())
                     {
                         SendText("<RES>1");
-                        MessageBox.Show("INDOVINATO!", "VITTORIA", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        lst_messaggi.Items.Add("OTHER HA INDOVINATO!");
                         FineTurno();
                     }
                     else
@@ -162,7 +166,7 @@ namespace esSocketClientWPF
                 {
                     if (messaggio.Substring(5, messaggio.Length - 5) == "1")
                     {
-                        MessageBox.Show("INDOVINATO!", "VITTORIA", MessageBoxButton.OK, MessageBoxImage.Information);
+                        lst_messaggi.Items.Add("HAI INDOVINATO!");
                         AvviaTurno();
                     }
                     else
@@ -170,15 +174,14 @@ namespace esSocketClientWPF
                 }
                 else
                 {
-                    lbl_received.Content = null;
-                    lbl_received.Content = "Received: " + messaggio;
+                    lst_messaggi.Items.Add("Other: " + messaggio);
                 }
                 messaggio = null;
             }
         }
-        private void StartTimer()
+        /*private void StartTimer()
         {
-            currTime = 60;
+            currTime = 120;
             lbl_timer.Content = null;
             lbl_timer.Content = currTime;
             timer.Start();
@@ -199,28 +202,38 @@ namespace esSocketClientWPF
                 else
                     FineTurno();
             }
-        }
+        }*/
         private void FineTurno()
         {
             lbl_disegna.Content = null;
             lbl_disegna.Content = "INDOVINA";
-            StopTimer();
-            StartTimer();
+            canvInvio.IsEnabled = false;
+            myTurn = false;
+            canvInvio.Strokes.Clear();
+            txt_guess.IsEnabled = true;
+            btn_submit.IsEnabled = true;
+            /*StopTimer();
+            StartTimer();*/
         }
         private void AvviaTurno()
         {
             daDisegnare = oggettiDaDisegnare[new Random().Next(0, oggettiDaDisegnare.Length)];
             lbl_disegna.Content = null;
             lbl_disegna.Content = "Disegna: " + daDisegnare;
-            StopTimer();
-            StartTimer();
+            canvInvio.IsEnabled = true;
+            myTurn = true;
+            canvInvio.Strokes.Clear();
+            txt_guess.IsEnabled = false;
+            btn_submit.IsEnabled = false;
+            /*StopTimer();
+            StartTimer();*/
         }
 
         private async Task SendCanvas()
         {
             while (true)
             {
-                if (isReceiving) return;
+                if (isReceiving || !myTurn) return;
                 isSending = true;
                 byte[] messaggio = CanvasToBytes();
                 if (messaggio.Length > MAX_BUFFER) throw new Exception("Canvas supera la dimensione massima consentita");
@@ -263,7 +276,7 @@ namespace esSocketClientWPF
                         }
                     }
 
-                    canvRicevi.Strokes = BytesToCanvas(toConvert);
+                    canvInvio.Strokes = BytesToCanvas(toConvert);
                     isReceiving = false;
                 }
             }
@@ -297,7 +310,7 @@ namespace esSocketClientWPF
                 SendCanvas();
                 RiceviMessaggio();
                 RiceviCanvas();
-                StartTimer();
+                //StartTimer();
             }
             catch (Exception ex)
             {
@@ -323,10 +336,6 @@ namespace esSocketClientWPF
             cp.SelectedColor = ((SolidColorBrush)canvInvio.Background).Color;
         }
 
-        private void txt_invia_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            SendText(txt_invia.Text);
-        }
 
         private void sld_size_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -337,24 +346,14 @@ namespace esSocketClientWPF
         private void btn_submit_Click(object sender, RoutedEventArgs e)
         {
             SendText("<SUB>"+txt_guess.Text);
+            txt_guess.Text = null;
         }
 
-        private void btnCaricaFile_Click(object sender, RoutedEventArgs e)
+        private void btn_send_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                if (ofd.ShowDialog() == true)
-                {
-                    byte[] bytes = File.ReadAllBytes(ofd.FileName);
-                    canvInvio.Strokes = BytesToCanvas(bytes);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            SendText(txt_invia.Text);
+            lst_messaggi.Items.Add("You: " + txt_invia.Text);
+            txt_invia.Text = null;
         }
     }
 }

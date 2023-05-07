@@ -23,21 +23,21 @@
             <RowDefinition Height="69*"/>
         </Grid.RowDefinitions>
         <xctk1:ColorPicker Name="cp" Margin="37,5,10,8" DisplayColorAndName="True" AvailableColorsSortingMode="HueSaturationBrightness" SelectedColorChanged="cp_SelectedColorChanged" Grid.Row="2" />
-        <InkCanvas x:Name="canvInvio" Margin="37,6,11,6" Background="#FFEADEDE" Grid.ColumnSpan="3" Grid.Row="1"/>
-        <InkCanvas x:Name="canvRicevi" Margin="9,6,26,6" Background="#FFEADEDE" EditingMode="None" IsEnabled="False" Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="1"/>
-        <Button x:Name="btnStart" Content="start" HorizontalAlignment="Center" Margin="0,5,0,22" Width="138" Click="btnStart_Click" Grid.Row="2" Grid.Column="4" FontSize="18"/>
-        <Button x:Name="btnCaricaFile" Content="Carica file" HorizontalAlignment="Center" Margin="0,5,0,23" Width="94" Click="btnCaricaFile_Click" Grid.Row="2" Grid.Column="3" FontSize="18"/>
-        <Button x:Name="btnInfo" Content="Help" HorizontalAlignment="Center" Margin="0,5,0,23" Width="111" Click="btnInfo_Click" Grid.Row="2" Grid.Column="5" FontSize="18"/>
-        <Label Content="To send:" HorizontalAlignment="Left" Margin="37,2,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="53"/>
-        <TextBox x:Name="txt_invia" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="95,6,0,0" Width="121" Height="41" TextChanged="txt_invia_TextChanged" Grid.Row="3" Grid.ColumnSpan="2"/>
-        <Label x:Name="lbl_received" Content="" HorizontalAlignment="Left" Margin="10,14,0,29" Grid.Row="3" Grid.Column="2"/>
+        <InkCanvas x:Name="canvInvio" Margin="37,6,11,6" Background="#FFEADEDE" Grid.ColumnSpan="3" Grid.Row="1" EditingModeInverted="EraseByPoint"/>
+        <Button x:Name="btnStart" Content="start" Margin="6,22,7,13" Click="btnStart_Click" Grid.Row="3" Grid.Column="4" FontSize="18"/>
+        <Button x:Name="btnInfo" Content="Help" Margin="9,22,9,14" Click="btnInfo_Click" Grid.Row="3" Grid.Column="5" FontSize="18"/>
+        <Label Content="To send:" Margin="32,10,0,17" Grid.Row="2" Grid.Column="3" FontSize="18"/>
+        <TextBox x:Name="txt_invia" TextWrapping="Wrap" Margin="10,9,20,11" Grid.Row="2" Grid.Column="4"/>
         <Button x:Name="btn_gomma" Content="GOMMA" HorizontalAlignment="Left" Margin="4,5,0,8" Width="78" Click="btn_gomma_Click" Grid.Row="2" Grid.Column="1" FontSize="18"/>
         <Slider x:Name="sld_size" HorizontalAlignment="Left" Margin="9,30,0,8" Width="115" Minimum="1" SmallChange="1" ValueChanged="sld_size_ValueChanged" Grid.Row="2" Grid.Column="2" Value="4"/>
         <Label Content="Grandezza pennello" Margin="10,3,0,30" Grid.Row="2" HorizontalAlignment="Left" Width="115" Grid.Column="2"/>
-        <Label Grid.Column="3" Content="Guess:" Grid.Row="3" FontSize="16" Margin="54,19,0,18"/>
-        <TextBox x:Name="txt_guess" Grid.Column="4" Margin="0,24,0,18" Grid.Row="3" TextWrapping="Wrap" FontSize="16"/>
-        <Button x:Name="btn_submit" Grid.Column="5" Content="SUBMIT" Margin="8,24,10,19" Grid.Row="3" FontSize="16" Click="btn_submit_Click"/>
-        <Label x:Name="lbl_disegna" Content="Disegna:" Margin="37,6,0,5" FontSize="18" HorizontalAlignment="Left" Grid.ColumnSpan="3"/>
-        <Label x:Name="lbl_timer" Grid.Column="3" Content="" HorizontalAlignment="Left" Margin="10,6,0,6" FontSize="18" Grid.ColumnSpan="2"/>
+        <Label Content="Guess:" Grid.Row="3" FontSize="16" Margin="29,17,66,21"/>
+        <TextBox x:Name="txt_guess" Margin="89,22,8,21" Grid.Row="3" TextWrapping="Wrap" FontSize="16" Grid.ColumnSpan="2"/>
+        <Button x:Name="btn_submit" Grid.Column="2" Content="SUBMIT" Margin="0,22,47,22" Grid.Row="3" FontSize="16" Click="btn_submit_Click"/>
+        <Label x:Name="lbl_disegna" Content="" Margin="37,0,102,5" FontSize="18" Grid.ColumnSpan="3"/>
+        <Label x:Name="lbl_timer" Grid.Column="2" Content="" Margin="115,0,57,6" FontSize="18" Grid.ColumnSpan="2"/>
+        <ListBox x:Name="lst_messaggi" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" Margin="57,0,66,0" FontSize="18"/>
+        <Button x:Name="btn_send" Grid.Column="5" Content="SEND" HorizontalAlignment="Left" Grid.Row="2" FontSize="18" Width="109" Margin="10,11,0,10" Click="btn_send_Click"/>
+        <Label Grid.Column="4" Content="CHAT" FontSize="18" Margin="50,6,39,6"/>
     </Grid>
 </Window>
